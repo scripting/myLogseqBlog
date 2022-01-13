@@ -1,0 +1,16 @@
+{
+	"twScreenName": "mylogseqblog",
+	
+	"logSeqJournalFolder": "/Users/bullmancuso/LogSeq/journals/",
+	"opmlJournalFile": "/Users/bullmancuso/LogSeq/journal.opml",
+	
+	"blogTitle": "My Outline Blog",
+	"blogDescription": "Connecting LogSeq for writing with Drummer for publishing.",
+	"blogWhenCreated": "Wed, 12 Jan 2022 17:45:25 GMT",
+	"blogTimeZoneOffset": -5,
+	"blogCopyright": "Copyright 2022, Bull Mancuso Partners.",
+	"blogUrlHeaderImage": "http://scripting.com/images/2021/07/07/hopperGasStation.png",
+	
+	"oauth_token": "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz",
+	"oauth_token_secret": "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz"
+	}

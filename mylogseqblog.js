@@ -6,6 +6,11 @@ const request = require ("request");
 const opml = require ("opml"); 
 
 var config = {
+	twScreenName: undefined,
+	
+	logSeqJournalFolder: undefined,
+	opmlJournalFile: undefined,
+	
 	blogTitle: undefined,
 	blogDescription: undefined,
 	blogWhenCreated: undefined,
@@ -19,12 +24,8 @@ var config = {
 	blogUrlWebsite: undefined,
 	blogUseCache: false,
 	
-	twScreenName: undefined,
-	
 	urlTwitterServer: "http://drummer.scripting.com/",
 	
-	logSeqJournalFolder: "/Users/davewiner/LogSeq/journals/",
-	opmlJournalFile: "/Users/davewiner/LogSeq/journal.opml",
 	
 	oauth_token: undefined,
 	oauth_token_secret: undefined
@@ -257,14 +258,16 @@ function saveMyLogSeqOpml (callback) {
 			}
 		else {
 			var opmltext = opml.stringify (theOutline);
-			fs.writeFile (config.opmlJournalFile, opmltext, function (err) {
-				if (err) {
-					console.log ("saveMyLogSeqOpml: err.message == " + err.message);
-					}
-				if (callback !== undefined) {
-					callback (undefined, opmltext);
-					}
-				});
+			if (config.opmlJournalFile !== undefined) {
+				fs.writeFile (config.opmlJournalFile, opmltext, function (err) {
+					if (err) {
+						console.log ("saveMyLogSeqOpml: err.message == " + err.message);
+						}
+					});
+				}
+			if (callback !== undefined) {
+				callback (undefined, opmltext);
+				}
 			}
 		});
 	}
