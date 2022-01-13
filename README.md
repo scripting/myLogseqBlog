@@ -4,11 +4,11 @@ A cross-platform Node app that publishes a LogSeq journal as a blog via Drummer
 
 ### How to install
 
-1. Download the app from the repo.
+1. <a href="https://github.com/scripting/myLogseqBlog/archive/refs/heads/main.zip">Download</a> the app from the repo.
 
-2. Open the folder in the Terminal app. On the Mac you can do this by dragging the folder onto the Terminal app icon.
+2. Open the folder in the Terminal app. On a Mac you can do this by dragging the folder onto the Terminal app icon.
 
-3. Type <i>npm install</i> at the command prompt. 
+3. Type <i>npm install</i> at the command prompt. A bunch of messages will scroll by.
 
 4. Edit config.json following the instructions below.
 
@@ -18,7 +18,7 @@ There are a bunch of values you have to set up in config.json to configure your 
 
 1. twScreenName -- your Twitter screen name.
 
-2. logSeqJournalFolder -- the path to your LogSeq journals folder. 
+2. logSeqJournalFolder -- the path to your LogSeq journals folder that we will build your blog from. 
 
 3. opmlJournalFile -- optional, a path to the OPML file that myLogseqBlog generates. You don't need this file to publish your blog.
 
@@ -40,31 +40,31 @@ There are a bunch of values you have to set up in config.json to configure your 
 
 Drummer uses Twitter for identity, so you will need a Twitter account to associate with your blog.
 
-If your Twitter username is lisasimpson, your blog will be at this URL:
+If your Twitter username is <i>lisasimpson,</i> your blog will be at this URL:
 
 http://oldschool.scripting.com/lisasimpson/
 
-To establish this connection, go to the <a href="http://drummer.scripting.com/">Drummer website</a> and log in with your Twitter id. 
+To establish this connection, go to the <a href="http://drummer.scripting.com/">Drummer website</a> and log in with your Twitter account. Twitter will warn you that Drummer can do a lot of things that it won't do unless you ask it to do them. 
 
 When Drummer opens, if this is your first time using it, a file named Notes will open automatically. 
 
-You can use this outline to get the values that are needed in config.json. 
+You can use this outline to get the values that are needed in config.json. If you've used Drummer before you can use any file for this purpose.
 
 In the top headline enter: <i>localStorage</i> and press Cmd-/ (on Mac, Control-/ on Windows and Linux).
 
-Double-click on the headline that appears to reveal a bunch of values. Theones you want are:
+Double-click on the headline that appears to reveal a bunch of values. The ones you want are:
 
-1. localStorage.twOauthToken
+1. twOauthToken
 
-2. localStorage.twOauthTokenSecret
+2. twOauthTokenSecret
 
-Copy these values into oauth_token and oauth_token_secret in your config.json file. 
+Copy these values into oauth_token and oauth_token_secret in your config.json file, as described above. 
 
 ### How to use
 
-I am a LogSeq newbie, so my instructions for using it will be rudimentary and possibly incomplete. But this worked for me, and hopefully will work for you. :smile:
+First a caveat -- I am a LogSeq newbie, so my instructions will be rudimentary and possibly incomplete. But this worked for me, and hopefully will work for you. :smile:
 
-First, the journals folder you specify in config.json will be public. Be sure not to add any private information to those files -- they will become public when you publish your blog. I understand it's possible to have more than one journals folder, if so you might want to set up a new one just for your blog. 
+First, the <i>journals</i> folder you specify in config.json will be public. Be sure not to add any private information to those files -- they will become public when you publish your blog. I understand it's possible to have more than one journals folder, if so you might want to set up a new one just for your blog. 
 
 Write whatever you want into your journal and when you're ready to publish, go to the myLogseqBlog folder and run the app by typing this into your Terminal app.
 
