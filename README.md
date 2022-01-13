@@ -76,6 +76,22 @@ http://oldschool.scripting.com/yourtwitterscreenname/
 
 Add something new to the journal, run the app again. 
 
+### One more step, make blog.opml public
+
+You will see an error the first time you run mylogseqblog.js because the file it generates, blog.opml, is private. You have to make it public, manually, using Drummer. When I have more time to fix this bug, this step will be incorporated into the app.
+
+1. In Drummer, choose the Open command in the File menu.
+
+2. You should see one file, blog.opml, choose it. 
+
+3. Choose Make outline public in the File menu, confirm that you want to make the file public. 
+
+4. A dialog will appear with the public URL of the file. You can dismiss the dialog. 
+
+5. You can then close the file, and close Drummer. 
+
+6. In the Terminal app, run mylogseqblog.js again. 
+
 ### Questions, comments?
 
 Post an issue <a href="https://github.com/scripting/myLogseqBlog/issues/new">here</a>. 
