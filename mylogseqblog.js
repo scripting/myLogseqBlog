@@ -1,4 +1,4 @@
-const myVersion = "0.4.0", myProductName = "myLogseqBlog";
+const myVersion = "0.4.1", myProductName = "myLogseqBlog";
 
 const fs = require ("fs");
 const utils = require ("daveutils");
@@ -98,6 +98,18 @@ function httpPost (url, data, callback) {
 			}
 		});
 	}
+function servercall (path, params, flAuthenticated, callback) {
+	var whenstart = new Date ();
+	if (params === undefined) {
+		params = new Object ();
+		}
+	if (flAuthenticated) { //1/11/21 by DW
+		params.oauth_token = config.oauth_token;
+		params.oauth_token_secret = config.oauth_token_secret;
+		}
+	var url = config.urlTwitterServer + path + "?" + buildParamList (params, false);
+	httpReadUrl (url, callback);
+	}
 function serverpost (path, params, flAuthenticated, filedata, callback) {
 	var whenstart = new Date ();
 	if (params === undefined) {
@@ -109,8 +121,6 @@ function serverpost (path, params, flAuthenticated, filedata, callback) {
 		}
 	var url = config.urlTwitterServer + path + "?" + buildParamList (params, false);
 	httpPost (url, filedata, callback);
-	
-	
 	}
 function getDateString (theDate=new Date ()) {
 	return (new Date (theDate).toUTCString ());
@@ -208,7 +218,7 @@ function readJournalFolderIntoOutline (folder, callback) {
 				var theDayOutline = opml.markdownToOutline (mdtext, {flAddUnderscores: false});
 				theDay.subs = theDayOutline.opml.body.subs;
 				theDay.subs.forEach (function (item) {
-					item.type = "outline";
+					item.type = "markdown";
 					item.created = bumpDate ().toUTCString ();
 					});
 				}
@@ -280,9 +290,13 @@ readConfig ("config.json", config, function () {
 			}
 		else {
 			console.log ("logseqpublish: opmltext.length == " + opmltext.length);
-			serverpost ("writewholefile", {relpath: "blog.opml"}, true, opmltext, function (err, data) {
+			const params = {
+				relpath: "blog.opml", 
+				type: "text/xml"
+				};
+			serverpost ("publishfile", params, true, opmltext, function (err, data) {
 				if (err) {
-					console.log ("writeWholeFile: err.message == " + err.message);
+					console.log ("publishfile: err.message == " + err.message);
 					}
 				else {
 					httpReadUrl ("http://drummercms.scripting.com/build?blog=" + config.twScreenName, function (err, data) {
@@ -293,7 +307,6 @@ readConfig ("config.json", config, function () {
 							console.log (data);
 							}
 						});
-					
 					}
 				});
 			}

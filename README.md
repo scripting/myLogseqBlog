@@ -4,7 +4,7 @@ A cross-platform Node app that publishes a LogSeq journal as a blog via Drummer
 
 ### How to install
 
-1. <a href="https://github.com/scripting/myLogseqBlog/archive/refs/heads/main.zip">Download</a> the app from the repo.
+1. <a href="https://github.com/scripting/myLogseqBlog/archive/refs/heads/main.zip">Download</a> the app from the repo. It's a .zip file. When you uncompress you should see a folder named <i>myLogseqBlog-main.</i>
 
 2. Open the folder in the Terminal app. On a Mac you can do this by dragging the folder onto the Terminal app icon.
 
@@ -76,21 +76,13 @@ http://oldschool.scripting.com/yourtwitterscreenname/
 
 Add something new to the journal, run the app again. 
 
-### One more step, make blog.opml public
+### Updates
 
-You will see an error the first time you run mylogseqblog.js because the file it generates, blog.opml, is private. You have to make it public, manually, using Drummer. When I have more time to fix this bug, this step will be incorporated into the app.
+#### v0.4.1, 1/13/22 by DW
 
-1. In Drummer, choose the Open command in the File menu.
+When <i>myLogseqBlog</i> uploads the file, it takes care of making it public, so the manual step specified in the docs is no longer needed. 
 
-2. You should see one file, blog.opml, choose it. 
-
-3. Choose Make outline public in the File menu, confirm that you want to make the file public. 
-
-4. A dialog will appear with the public URL of the file. You can dismiss the dialog. 
-
-5. You can then close the file, and close Drummer. 
-
-6. In the Terminal app, run mylogseqblog.js again. 
+The nodes we create are of type <i>markdown</i>, so that the blog processor knows to render the text through a Markdown processor. 
 
 ### Questions, comments?
 
