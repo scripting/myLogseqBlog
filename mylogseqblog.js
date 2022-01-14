@@ -1,4 +1,4 @@
-const myVersion = "0.4.1", myProductName = "myLogseqBlog";
+const myVersion = "0.4.2", myProductName = "myLogseqBlog";
 
 const fs = require ("fs");
 const utils = require ("daveutils");
@@ -33,18 +33,23 @@ var config = {
 
 function readConfig (f, theConfig, callback) { 
 	fs.readFile (f, function (err, jsontext) {
-		if (!err) {
+		if (err) {
+			console.log ("readConfig: err.message == " + err.message);
+			callback (err);
+			}
+		else {
 			try {
 				var jstruct = JSON.parse (jsontext);
 				for (var x in jstruct) {
 					theConfig [x] = jstruct [x];
 					}
+				callback (undefined);
 				}
 			catch (err) {
 				console.log ("readConfig: err.message == " + err.message);
+				callback (err);
 				}
 			}
-		callback ();
 		});
 	}
 function buildParamList (paramtable, flPrivate) {
@@ -262,7 +267,11 @@ function readJournalFolderIntoOutline (folder, callback) {
 		});
 	}
 function saveMyLogSeqOpml (callback) {
-	readJournalFolderIntoOutline (config.logSeqJournalFolder, function (err, theOutline) {
+	var folder = utils.trimWhitespace (config.logSeqJournalFolder);
+	if (!utils.endsWith (folder, "/")) { //1/14/22 by DW
+		folder += "/";
+		}
+	readJournalFolderIntoOutline (folder, function (err, theOutline) {
 		if (err) {
 			console.log ("saveMyLogSeqOpml: err.message == " + err.message);
 			}
@@ -282,33 +291,35 @@ function saveMyLogSeqOpml (callback) {
 		});
 	}
 
-readConfig ("config.json", config, function () {
-	console.log ("config == " + utils.jsonStringify (config));
-	saveMyLogSeqOpml (function (err, opmltext) {
-		if (err) {
-			console.log ("logseqpublish: err.message == " + err.message);
-			}
-		else {
-			console.log ("logseqpublish: opmltext.length == " + opmltext.length);
-			const params = {
-				relpath: "blog.opml", 
-				type: "text/xml"
-				};
-			serverpost ("publishfile", params, true, opmltext, function (err, data) {
-				if (err) {
-					console.log ("publishfile: err.message == " + err.message);
-					}
-				else {
-					httpReadUrl ("http://drummercms.scripting.com/build?blog=" + config.twScreenName, function (err, data) {
-						if (err) {
-							console.log ("drummerCms: err.message == " + err.message);
-							}
-						else {
-							console.log (data);
-							}
-						});
-					}
-				});
-			}
-		});
+readConfig ("config.json", config, function (err) {
+	if (!err) {
+		console.log ("config == " + utils.jsonStringify (config));
+		saveMyLogSeqOpml (function (err, opmltext) {
+			if (err) {
+				console.log ("logseqpublish: err.message == " + err.message);
+				}
+			else {
+				console.log ("logseqpublish: opmltext.length == " + opmltext.length);
+				const params = {
+					relpath: "blog.opml", 
+					type: "text/xml"
+					};
+				serverpost ("publishfile", params, true, opmltext, function (err, data) {
+					if (err) {
+						console.log ("publishfile: err.message == " + err.message);
+						}
+					else {
+						httpReadUrl ("http://drummercms.scripting.com/build?blog=" + config.twScreenName, function (err, data) {
+							if (err) {
+								console.log ("drummerCms: err.message == " + err.message);
+								}
+							else {
+								console.log (data);
+								}
+							});
+						}
+					});
+				}
+			});
+		}
 	});

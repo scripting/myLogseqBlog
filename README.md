@@ -8,6 +8,8 @@ A cross-platform Node app that publishes a LogSeq journal as a blog via Drummer
 
 2. Open the folder in the Terminal app. On a Mac you can do this by dragging the folder onto the Terminal app icon.
 
+3. <a href="https://nodejs.dev/learn/how-to-install-nodejs">Install Node.js</a> if it is not installed on your machine.
+
 3. Type <i>npm install</i> at the command prompt. A bunch of messages will scroll by.
 
 4. Edit config.json following the instructions below.
@@ -35,6 +37,14 @@ There are a bunch of values you have to set up in config.json to configure your 
 9. blogUrlHeaderImage -- the URL of a wide rectangular image to be displayed at the top of every page. There is a default image if you don't provide one. 
 
 10. oauth_token, oauth_token_secret -- myLogseqBlog uses these values and the next one to identify you to the Drummer system, so it knows which account to store your outline under. It is not saved in the OPML file it generates. The next section explains how to get these values. 
+
+### Debugging config.json
+
+When you're done setting up config.json, you might want to check the JSON syntax using a web service like <a href="http://jsonlint.com/">jsonlint</a>. 
+
+Copy and paste the text of your config.json file into its edit box and click the button at the bottom to validate. If there's an error, it will tell you where it is. 
+
+Repeat until it reports that your JSON is valid, then make the corrections in your config.json file. 
 
 ### Drummer setup
 
@@ -77,6 +87,14 @@ http://oldschool.scripting.com/yourtwitterscreenname/
 Add something new to the journal, run the app again. 
 
 ### Updates
+
+#### v0.4.2, 1/14/22 by DW
+
+If there's an error in config.json the app does not try to update the blog. There's no chance it would work or provide any meaningful results. 
+
+If the user leaves a trailing slash off the folder path, that should not be the end of things, we just add a trailing slash and proceed. 
+
+Added section about debugging config.json and a link to the page where you can install Node.js.
 
 #### v0.4.1, 1/13/22 by DW
 
